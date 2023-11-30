@@ -12,7 +12,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "pure",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
@@ -27,12 +27,29 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "src/assets/",
+                "ignore": [
+                  "**/*.htaccess"
+                ],
+                "output": "/assets/"
+              },
+              {
+                "glob": ".htaccess",
+                "input": "src/assets",
+                "output": "/"
+              }
             ],
             "styles": [
-              "src/styles.scss"
+              "./node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "./node_modules/@angular/cdk/overlay-prebuilt.css",
+              "src/scss/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@popperjs/core/dist/umd/popper.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {

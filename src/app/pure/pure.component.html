@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="mt-0 row">
+        <div class="col-9">
+            <div class="mt-1">
+                <nav wfvsPagination #pagination="wfvsPagination" [totalPages]="number_of_pages" [pageNo]="current_page"
+                    (pageChange)="onPageChange($event)">
+                    <div style="float: left;">
+                        <select (change)="pageSizeHandler($event)" size="1">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                        </select>
+                        <label for="pageSize">&nbsp; per Page</label>
+                    </div>
+                    <div style="float: right;">
+                        {{current_page}} / {{number_of_pages}}
+                    </div>
+                    <ul class="pagination pagination-sm justify-content-center">
+                        <li class="page-item" [ngClass]="{'disabled': pagination.isFirst}">
+                            <button class="page-link" (click)="pagination.first()" [disabled]="pagination.isFirst">
+                                First
+                            </button>
+                        </li>
+                        <li class="page-item" [ngClass]="{'disabled': pagination.isFirst}">
+                            <button class="page-link" (click)="pagination.prev()" [disabled]="pagination.isFirst">
+                                Previous
+                            </button>
+                        </li>
+                        @for (page of select_pages(pagination.totalPages); track page; let i = $index) {
+                        <li class="page-item">
+                            @if (isNumber(page)) {
+                            <button class="page-link" (click)="onPageChange(page+1)">
+                                {{page+1}}
+                            </button>
+                            }
+                            @if (!isNumber(page)) {
+                            <button class="page-link">
+                                {{page}}
+                            </button>
+                            }
+                        </li>
+                        }
+                        <li class="page-item" [ngClass]="{'disabled': pagination.isLast}">
+                            <button class="page-link" (click)="pagination.next()" [disabled]="pagination.isLast">
+                                Next
+                            </button>
+                        </li>
+                        <li class="page-item" [ngClass]="{'disabled': pagination.isLast}">
+                            <button class="page-link" (click)="pagination.last()" [disabled]="pagination.isLast">
+                                Last
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            @if (result_list | async; as list) {
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h2 class="card-title">{{number_of_results}} items</h2>
+                </div>
+                <div class="list-group list-group-flush">
+                    @for (item of list; track item) {
+                    <div class="list-group-item list-group-item-action py-1" (click)="show(item)" (keyup)="show(item)"
+                        tabindex="0" role="button">
+                        <wfvs-list-item-view [item]="item" [authenticated]="aa.isLoggedIn"></wfvs-list-item-view>
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+        <div class="card col-3">
+            <div class="card-body">
+                <wfvs-facet [list]=true [chunk_size]=10 [title]="'genre'" [item_array]="genre_obs"
+                    [term_query_field]="'metadata.genre'" (notice)="facetNotice()"></wfvs-facet>
+                <wfvs-facet [list]=true [chunk_size]=10 [title]="'journal'" [item_array]="publisher_obs"
+                    [term_query_field]="'metadata.sources.title.keyword'" (notice)="facetNotice()"></wfvs-facet>
+                <wfvs-facet [list]=false [chunk_size]=10 [title]="'created'" [item_array]="created_obs"
+                    [term_query_field]="'creationDate'" (notice)="facetNotice()"></wfvs-facet>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<div [formGroup]="searchTermForm">
+  <div class="row mt-1 w-100">
+    <div class="col-2">
+      <select class="form-select form-select-sm" [ngClass]="'bg-'+colors[0]+' border-'+colors[2]+' text-'+colors[1]"
+        formControlName="clause" (change)="onBoolClauseSelect($any($event.target).value)">
+        <option *ngFor="let clause of clauses" [value]="clause">{{clause}}</option>
+      </select>
+    </div>
+    <div class="col-2">
+      <select class="form-select form-select-sm" [ngClass]="'bg-'+colors[0]+' border-'+colors[2]+' text-'+colors[1]"
+        formControlName="type" (change)="onQueryTypeSelect($any($event.target).value)">
+        <option *ngFor="let type of types" [value]="type">{{type}}</option>
+      </select>
+    </div>
+    <div class="col-4">
+      <input class="form-control form-control-sm" [ngClass]="'bg-'+colors[0]+' border-'+colors[2]+' text-'+colors[1]"
+        type="text" formControlName="field" (keyup)="filter()" id="selectedField" autocomplete="off">
+      <div *ngIf="filteredTerms.length > 0">
+        <ul class="list-group" (clickOutside)="close()">
+          <li class="list-group-item list-group-item-action list-group-item-secondary py-0 text-start" *ngFor="let term of filteredTerms"
+            (click)="select(term)" (keyup)="select(term)" tabindex="0"><small>{{term}}</small></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-3">
+      <input class="form-control form-control-sm" [ngClass]="'bg-'+colors[0]+' border-'+colors[2]+' text-'+colors[1]"
+        type="text" formControlName="searchTerm" id="searchTerm">
+    </div>
+    <div class="col-1 btn-group btn-group-sm d-flex">
+      <input type="button" class="btn btn-sm" [ngClass]="'btn-outline-'+colors[2]" name="remove" value="--" (click)="removeSearchTerm()" />
+      <input type="button" class="btn btn-sm ms-1" [ngClass]="'btn-outline-'+colors[2]" name="add" value="+" (click)="addSearchTerm()" />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div [formGroup]="ousForm">
+    <div class="d-sm-flex flex-sm-row mb-1 gap-2 align-items-center">
+        <div class="col-sm-6">
+            <input class="form-control form-control-sm" type="text" placeholder="name" formControlName="name"
+                id="ou-name" (keyup)="ouSearch()" autocomplete="off" />
+            <div *ngIf="ous">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-action list-group-item-secondary py-0 text-start"
+                        *ngFor="let ou of ous | async" (click)="select(ou)" (keyup)="select(ou)" tabindex="0">
+                        <small>{{ou.name}}</small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <input class="form-control form-control-sm" type="text" placeholder="id" formControlName="id" id="ou-id" readonly />
+        </div>
+        <div class="col-sm-1 btn-group btn-group-sm d-flex">
+            <input type="button" class="btn btn-sm" name="remove" value="--" (click)="removeOu()" />
+            <input type="button" class="btn btn-sm ms-1" name="add" value="+" (click)="addOu()" />
+        </div>
+    </div>
+</div>

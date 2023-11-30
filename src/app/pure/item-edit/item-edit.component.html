@@ -1,0 +1,162 @@
+<div class="container mt-3">
+    <form [formGroup]="form">
+        <div class="row g-1 mb-1">
+            <label for="title" class="col-sm-2 col-form-label col-form-label-sm">title</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control form-control-sm" id="title" name="title" formControlName="title">
+            </div>
+        </div>
+        <div class="row g-1 mb-1">
+            <label for="alt_titles" class="col-sm-2 col-form-label col-form-label-sm">alternative titles</label>
+            <div class="col-sm-10">
+                <div formArrayName="alt_titles">
+                    <div *ngFor="let alt of alt_titles.controls; let i = index">
+                        <div class="row g-1 align-items-center"
+                            [ngClass]="{'mb-1': i !== alt_titles.controls.length - 1}" [formGroupName]="i">
+                            <div class="col-sm-2">
+                                <label for="alt_title_type" class="visually-hidden">type</label>
+                                <select id="alt_title_type" class="form-select form-select-sm" formControlName="type">
+                                    <option [ngValue]="null" selected>type</option>
+                                    <option [ngValue]="t" *ngFor="let t of alt_title_types">{{t}}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="alt_title_lang" class="visually-hidden">language</label>
+                                <select id="alt_title_lang" class="form-select form-select-sm"
+                                    formControlName="language">
+                                    <option [value]="null" selected>language</option>
+                                    <option [value]="l" *ngFor="let l of alt_title_langs">{{l}}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control form-control-sm" id="alt_title_value"
+                                    formControlName="value">
+                            </div>
+                            <div class="col-1 btn-group btn-group-sm d-flex justify-content-between">
+                                <input type="button" class="btn btn-sm" name="remove" value="--"
+                                    (click)="removeAltTitle(i)" />
+                                <input type="button" class="btn btn-sm ms-1" name="add" value="+"
+                                    (click)="addAltTitle()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-1 mb-1">
+            <label for="alt_titles" class="col-sm-2 col-form-label col-form-label-sm">creators</label>
+            <div class="col-sm-10">
+                <div formArrayName="creators">
+                    <div *ngFor="let creator of creators.controls; let ci = index">
+                        <div class="row g-1 align-items-center"
+                            [ngClass]="{'mb-1': ci !== creators.controls.length - 1}" [formGroupName]="ci">
+                            <div class="col-sm-11">
+                                <div class="row g-1 mb-1 align-items-center">
+                                    <label for="type"
+                                        class="col-sm-1 col-form-label col-form-label-sm text-end">type</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control form-control-sm" id="type"
+                                            formControlName="type">
+                                    </div>
+                                    <label for="role"
+                                        class="col-sm-1 col-form-label col-form-label-sm text-end">role</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control form-control-sm" id="role"
+                                            formControlName="role">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-11" formGroupName="person">
+                                <div class="row g-1 mb-1 align-items-center">
+                                    <label for="givenName"
+                                        class="col-sm-1 col-form-label col-form-label-sm text-end">given</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control form-control-sm" id="givenName"
+                                            formControlName="givenName">
+                                    </div>
+                                    <label for="familyName"
+                                        class="col-sm-1 col-form-label col-form-label-sm text-end">family</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control form-control-sm" id="familyName"
+                                            formControlName="familyName">
+                                    </div>
+                                </div>
+                                <div class="row g-1 mb-1 align-items-center">
+                                    <label for="orcid"
+                                        class="col-sm-1 col-form-label col-form-label-sm text-end">orcid</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control form-control-sm" id="orcid"
+                                            formControlName="orcid">
+                                    </div>
+                                    <label for="id"
+                                        class="col-sm-1 col-form-label col-form-label-sm text-end">id</label>
+                                    <div class="col-sm-5" formGroupName="identifier">
+                                        <div class="row g-1 mb-1 border border-warning">
+                                            <input type="text" class="col-sm-2 form-control form-control-sm" id="type"
+                                                formControlName="type">
+                                            <input type="text" class="col-sm-6 form-control form-control-sm" id="id"
+                                                formControlName="id">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div formArrayName="organizations">
+                                    <div *ngFor="let pou of getPersonOus(ci).controls; let i = index">
+                                        <div class="row g-1 mb-1 align-items-center" [formGroupName]="i">
+                                            <label for="ou_name"
+                                                class="col-sm-1 col-form-label col-form-label-sm text-end">name</label>
+                                            <div class="col-sm-5">
+                                                <input type="text" class="form-control form-control-sm" id="ou_name"
+                                                    formControlName="name">
+                                            </div>
+                                            <div class="col-1 btn-group btn-group-sm d-flex justify-content-between">
+                                                <input type="button" class="btn btn-sm" name="remove" value="--"
+                                                    (click)="removePersonOU(ci, i)" />
+                                                <input type="button" class="btn btn-sm ms-1" name="add" value="+" (click)="addPersonOU(ci)" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-1 btn-group btn-group-sm d-flex justify-content-between">
+                                <input type="button" class="btn btn-sm" name="remove" value="--"
+                                    (click)="removeCreator(ci)" />
+                                <input type="button" class="btn btn-sm ms-1" name="add" value="+"
+                                    (click)="addCreator(ci)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-1 mb-1">
+            <label for="genre" class="col-sm-2 col-form-label col-form-label-sm">genre</label>
+            <div class="col-sm-2">
+                <label for="genre" class="visually-hidden">genre</label>
+                <select id="genre" class="form-select form-select-sm" formControlName="genre">
+                    <option [ngValue]="null" selected>genre</option>
+                    <option [ngValue]="g" *ngFor="let g of genres">{{g}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row g-1 mb-1">
+            <label for="workflow" class="col-form-label col-sm-2 pt-0">workflow</label>
+            <div class="col-sm-10">
+                <div id="workflow" class="form-check form-check-inline" *ngFor="let wf of workflows">
+                    <input class="form-check-input" type="radio" id="wf" [value]="wf" name="workflow"
+                        formControlName="workflow" [checked]="wf === 'STANDARD'">
+                    <label class="form-check-label" for="wf">
+                        {{wf}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row g-1 mt-2">
+            <div class="col-sm-2 offset-sm-2">
+                <button type="submit" class="btn btn-sm btn-outline-secondary">S A V E</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container">
+    <pre>{{form.value | json}}</pre>
+</div>

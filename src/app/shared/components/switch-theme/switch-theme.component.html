@@ -1,0 +1,24 @@
+  <!--
+  style section in angular.json:
+
+  "styles": [
+              "./node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "./node_modules/@angular/cdk/overlay-prebuilt.css",
+              "./node_modules/animate.css/animate.min.css",
+              {
+                "input": "src/scss/styles_dark.scss",
+                "bundleName": "dark",
+                "inject": false
+              },
+              {
+                "input": "src/scss/styles_default.scss",
+                "bundleName": "default",
+                "inject": false
+              }
+            ],
+-->
+  <div class="form-check form-switch">
+    <input id="switch" class="form-check-input bg-light border border-dark" type="checkbox" role="switch"  (click)="switch_theme()">
+    <!-- <label class="form-check-label" for="switch">{{current_theme()}}</label> -->
+  </div>
+  

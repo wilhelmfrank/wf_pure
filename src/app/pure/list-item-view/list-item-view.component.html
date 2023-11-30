@@ -1,0 +1,49 @@
+<div class="container-fluid border-bottom">
+    <div class=" d-flex flex-sm-row align-items-center">
+        <div class="col-1 me-3">
+            <div class="d-flex flex-sm-column align-content-center">
+                <span
+                    class="mb-1 badge rounded-pill bg-transparent border border-secondary text-secondary text-truncate"
+                    [innerHtml]="item?.metadata?.genre">
+                </span>
+            </div>
+        </div>
+        <div class="col-11">
+            <div class="d-flex flex-sm-row align-items-center">
+                <strong class="col-10" [innerHtml]="item?.metadata?.title"></strong>
+                @if (item?.files) {
+                <small class="col-sm-2 ms-auto" [innerHtml]="'files: ' + item?.files?.length"></small>
+                }
+            </div>
+            <div class="d-flex flex-sm-row">
+                <small class="col-10 text-muted" [innerHtml]="item?.metadata?.abstracts | json"></small>
+            </div>
+            <div class="d-flex flex-sm-row">
+                @for (author of item?.metadata?.creators; track author) {
+                <div class="me-1">
+                    <small
+                        [innerHtml]="(author?.person?.familyName || no_name) + ' ' + (author?.person?.givenName || no_name)">
+                    </small>
+                    @if (author?.person?.orcid) {
+                    <a [href]="author?.person?.orcid" target="_blank">
+                        <img alt="ORCID logo" src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png"
+                            width="16" height="16" />
+                    </a>
+                    }
+                </div>
+                }
+            </div>
+            <div class="d-flex flex-sm-row">
+
+            </div>
+            @if (authenticated) {
+            <div class="d-flex flex-sm-row">
+                <small class="me-2 text-secondary" [innerHtml]="item?.objectId"></small>
+                <small class="me-2 text-primary" [innerHtml]="item?.latestVersion?.versionNumber"></small>
+                <small class="me-2" [ngClass]="stateColor(item?.publicState)" [innerHtml]="item?.publicState"></small>
+                <small class="text-secondary" [innerHtml]="item?.lastModificationDate"></small>
+            </div>
+            }
+        </div>
+    </div>
+</div>

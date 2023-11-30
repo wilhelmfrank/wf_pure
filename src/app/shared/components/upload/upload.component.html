@@ -1,0 +1,42 @@
+<div class="container mt-2">
+  <div class="mx-auto">
+    <div class="w-50">
+      <input #fileInput type="file" class="form-control form-control-sm" id="customFile" multiple
+        (change)="onFileChange(fileInput.files)">
+      <label #fileLabel class="form-label text-info" for="customFile">Select file(s) ... (or drop 'em!)</label>
+    </div>
+  </div>
+  <div class="mx-auto">
+    <div class="w-50">
+      <input #folderInput type="file" class="form-control form-control-sm" id="customFolder" webkitdirectory multiple
+        (change)="onFolderChange(folderInput.files)">
+      <label #folderLabel class="form-label text-info" for="customFolder">Select folder(s) ... (or drop 'em!)</label>
+    </div>
+  </div>
+  <div *ngIf="isInProgress" class="progress">
+    <div class="progress-bar bg-warning progress-bar-striped" role="progressbar"
+      attr.aria-valuenow="{{progress.percentage}}" aria-valuemin="0" aria-valuemax="100"
+      [ngStyle]="{width:progress.percentage+'%'}">
+      {{progress.percentage}}%</div>
+  </div>
+  <input type="button" class="btn btn-sm btn-outline-info me-auto my-2" [disabled]="!fileList" (click)="upload()"
+    value="Upload" />
+  <input type="button" class="btn btn-sm btn-outline-info my-2" (click)='showFiles()'
+    [value]="showFile ? 'HIDE' : 'SHOW'" />
+  <div *ngIf="showFile">
+    <div class="list-group">
+      <div *ngFor="let file of fileUploads | async"
+        class="list-group-item-info list-group-item-action py-0 text-start w-50"
+        (click)="download(file)" (keyup)="download(file)" tabindex="0">{{file}}</div>
+    </div>
+    <!--
+    <div class="list-group">
+      <div *ngFor="let file of fileUploads | async"
+        class="list-group-item-info list-group-item-action py-0 text-start w-50" (click)="setImageSource(file)"><a
+          [href]="file"></a>{{file}}</div>
+    </div>
+  -->
+  </div>
+  <img *ngIf="selectedImage" [src]=selectedImage alt="selected"/>
+  <pre>{{selectedJson | json}}</pre>
+</div>

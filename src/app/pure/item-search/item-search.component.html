@@ -1,0 +1,48 @@
+<div class="container">
+    <form [formGroup]="dynamicForm" (ngSubmit)="search()">
+        <div formArrayName="fields">
+            @for (field of fields.controls; track field; let i = $index) {
+            <div>
+                <div [formGroupName]="i">
+                    @if (fields.controls[i].get('join')) {
+                    <wfvs-item-search-criterion [isc_form]="$any(fields).controls[i]" [array_index]="i"
+                        (notice)="notification($event, i)"></wfvs-item-search-criterion>
+                    } @else {
+                        <wfvs-item-search-brackets [search_form]="dynamicForm" [array_index]="i"></wfvs-item-search-brackets>
+                    }
+                </div>
+            </div>
+            }
+            <div class="btn-grid mt-2">
+                <button type="button" class="btn btn-sm btn-outline-warning"
+                    [disabled]="dynamicForm.invalid || fields.controls.length === 0" (click)="show_query()">
+                    show query
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-danger"
+                    [disabled]="dynamicForm.invalid || fields.controls.length === 0" (click)="show_form()">
+                    show form
+                </button>
+                <button type="submit" class="btn btn-sm btn-outline-primary"
+                    [disabled]="dynamicForm.invalid || fields.controls.length === 0">
+                    search
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary"
+                    [disabled]="dynamicForm.invalid || fields.controls.length === 0" (click)="reset()">
+                    reset
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-info" (click)="undo()">
+                    undo
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-dark" (click)="list_cone('persons/boos')">
+                    cone
+                </button>
+            </div>
+        </div>
+    </form>
+    @if (result) {
+    <pre>{{result | json}}</pre>
+    }
+    @if (cone_results) {
+    <pre>{{cone_results | async | json}}</pre>
+    }
+</div>

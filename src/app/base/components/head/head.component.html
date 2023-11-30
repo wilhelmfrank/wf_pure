@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg p-0">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/']">
+      <img class="d-inline-block align-text-center" width="44px" src="assets/images/m_green.png" />
+      <span class=" ms-3">MPG . P u R e</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- d-lg-flex reqired! correspondent to navbar-expand-lg -->
+    <div class="collapse navbar-collapse d-lg-flex" id="navbarSupportedContent">
+      <ul class="navbar-nav col-4 justify-content-start">
+      </ul>
+      <form class="d-flex col-4 justify-content-center" [formGroup]="search_form" (ngSubmit)="search()">
+        <!-- form-control-sm is only applied with align-delf-center !!! -->
+        <input id="text" class="form-control form-control-sm me-2 w-50 align-self-center" type="search" formControlName="text"
+          placeholder="Search" aria-label="Search">
+        <button class="btn btn-sm" type="submit"><i class="bi bi-search"></i></button>
+        <a wfvsTooltip class="btn btn-sm" data-bs-toggle="tooltip" data-bs-title="advanced search" role="button" [routerLink]="['/as']"><i class="bi bi-binoculars"></i></a>
+      </form>
+      <div class="d-flex col-4 justify-content-end align-items-center">
+        <wfvs-switch-bs-theme class="me-2"></wfvs-switch-bs-theme>
+        <wfvs-aa></wfvs-aa>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!--
+  <div class="lh-1">
+        <div class="text-center">
+          <span class="text-secondary fs-5">wilhel</span><span class="times_new_roman fs-2">mina</span>
+        </div>
+        <div class="text-center mirror">
+          <span class="text-secondary fs-6">frank von stein</span>
+        </div>
+      </div>
+-->
