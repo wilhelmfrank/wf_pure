@@ -5,7 +5,7 @@
             <div>
                 <div [formGroupName]="b_idx">
                     {{brackets.controls[b_idx].get('join')?.value | json}}
-                    <wfvs-item-search-criterion [isc_form]="$any(brackets).controls[b_idx]" [array_index]="b_idx"
+                    <wfvs-item-search-criterion [isc_form]="$any(field)" [array_index]="b_idx"
                         (notice)="notification($event, b_idx)"></wfvs-item-search-criterion>
                 </div>
             </div>
