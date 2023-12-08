@@ -9,15 +9,15 @@
     </button>
     <!-- d-lg-flex reqired! correspondent to navbar-expand-lg -->
     <div class="collapse navbar-collapse d-lg-flex" id="navbarSupportedContent">
-      
-        <span class="nav col-4 align-items-center justify-content-center">MPG.PuRe</span>
-      
-      <form class="d-flex col-4 justify-content-center" [formGroup]="search_form" (ngSubmit)="search()">
-        <!-- form-control-sm is only applied with align-delf-center !!! -->
-        <input id="text" class="form-control form-control-sm me-2 w-50 align-self-center" type="search" formControlName="text"
+      <span class="nav col-4 align-items-center justify-content-center">MPG.PuRe</span>
+      <form class="col-4" [formGroup]="search_form" (ngSubmit)="search()">
+        <div class="input-group input-group-sm border w-50">
+          <div class="input-group-text border-0"><i class="bi-search"></i></div>
+          <input id="text" class="form-control border-0" type="search" formControlName="text"
           placeholder="Search" aria-label="Search">
-        <button class="btn btn-sm" type="submit"><i class="bi bi-search"></i></button>
-        <a wfvsTooltip class="btn btn-sm" data-bs-toggle="tooltip" data-bs-title="advanced search" role="button" [routerLink]="['/as']"><i class="bi bi-binoculars"></i></a>
+          <div class="input-group-text border-0"><a wfvsTooltip class="btn" data-bs-toggle="tooltip" data-bs-title="advanced search" role="button" [routerLink]="['/as']"><i class="bi-binoculars"></i></a>
+          </div>
+        </div>  
       </form>
       <div class="d-flex col-4 justify-content-end align-items-center">
         <wfvs-switch-bs-theme class="me-2"></wfvs-switch-bs-theme>

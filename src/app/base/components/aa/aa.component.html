@@ -1,6 +1,6 @@
 <div *ngIf="!aa.isLoggedIn" class="nav-item">
   <!-- empty array as routerLink value enables hand pointer -->
-  <a [routerLink]="[]" class="nav-link text-secondary" (click)="sign_in()">sign in</a>
+  <a [routerLink]="[]" class="nav-link" (click)="sign_in()"><i class="bi-person-lock"></i></a>
 </div>
 <div *ngIf="aa.isLoggedIn" class="nav-item dropdown-center">
   <a class="nav-link dropdown-toggle text-secondary" href="#" id="navbarDropdown" role="button"

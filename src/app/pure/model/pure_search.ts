@@ -8,10 +8,23 @@ export interface bool_query {
   }
 }
 
+export const search_criterion = {
+  join: 'AND',
+  filter: null,
+  sub_filter: null
+}
+
+export const bracketed_search_criterion = {
+  join: 'OR',
+  filter: null,
+  sub_filter: null,
+  first_in_brackets: true
+}
+
 export const join_enum: Record<string, any> = {
   AND: 'must',
   OR: 'should',
-  MOT: 'must_not'
+  MOT: 'must_not',
 } as const;
 
 export const fieldOptions = [

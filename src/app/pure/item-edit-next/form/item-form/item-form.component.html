@@ -16,14 +16,16 @@
         <div class="d-sm-flex flex-sm-row gap-1 mb-1 align-items-center">
             <label for="title" class="col-sm-2 col-form-label col-form-label-sm">message</label>
             <div class="col-sm-9">
-                <wfvs-chips [form]="form" [control_name]="message"></wfvs-chips>
-                <!--<input type="text" class="form-control form-control-sm" id="message" name="message"
-                    formControlName="message">-->
+                <input type="text" class="form-control form-control-sm" id="message" name="message"
+                    formControlName="message">
             </div>
         </div>
         <div class="d-sm-flex flex-sm-row gap-1 mb-1">
             <label for="title" class="col-sm-2 col-form-label col-form-label-sm">local tags</label>
-            <div class="col-sm">
+            <div class="col-sm-9">
+                <wfvs-chips [form]="form" [chips]="localTags.value" [control_name]="'localTags'"></wfvs-chips>
+            </div>
+            <!--<div class="col-sm">
                 <ng-container formArrayName="localTags">
                     @for (tag of localTags.controls; track tag; let i = $index) {
                     <div class="d-sm-flex flex-sm-row gap-1 align-items-center"
@@ -44,7 +46,7 @@
                     </div>
                     }
                 </ng-container>
-            </div>
+            </div>-->
         </div>
         <div class="d-sm-flex flex-sm-row mb-1">
             <div class="col-sm offset-sm-2">

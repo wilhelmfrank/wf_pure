@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MatChipEditedEvent, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatIconModule } from '@angular/material/icon';
-import { ControlType } from 'src/app/pure/item-edit-next/services/form-builder.service';
 
 @Component({
   selector: 'wfvs-chips',
@@ -15,18 +14,11 @@ import { ControlType } from 'src/app/pure/item-edit-next/services/form-builder.s
 export class ChipsComponent {
 
   @Input() form!: FormGroup;
-  @Input() control_name!: any;
+  @Input() control_name!: string;
+  @Input() chips!: string[]
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-
-  // announcer = inject(LiveAnnouncer);
-
-  get control() {
-    return this.form.get(this.control_name) as FormControl<ControlType<string>>;
-  }
-
-  chips: string[] = [];
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -43,8 +35,6 @@ export class ChipsComponent {
 
     if (index >= 0) {
       this.chips.splice(index, 1);
-
-      // this.announcer.announce(`Removed ${chip}`);
     }
   }
 

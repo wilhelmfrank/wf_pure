@@ -1,7 +1,7 @@
 <div [formGroup]="isc_form">
     <div class="row mt-1 w-100 align-items-center">
         <div class="col-1">
-            @if (array_index > 0) {
+            @if (array_index > 0 && !first_in_brackets) {
             <select class="form-select form-select-sm" formControlName="join" (change)="join(j.value)" #j>
                 @for (join of joinOptions; track join) {
                 <option [value]="join">
@@ -11,10 +11,11 @@
             </select>
             }
         </div>
+        @if (!brackets) {
         <div class="col-1">
-                <button type="button" class="btn btn-sm" (click)="addBracketsToFormArray()">
-                    (
-                </button>
+            <button type="button" class="btn btn-sm" (click)="addBracketsToFormArray()">
+                (
+            </button>
         </div>
         <div class="col-2">
             <select class="form-select form-select-sm" formControlName="filter" (change)="currentField(k.value)" #k>
@@ -59,17 +60,17 @@
         </div>
         }
         @if (isc_form.get('value') && k.value !== 'Person' && k.value !== 'Organization' && k.value !== 'Identifier') {
-        <div class="col-8">
+        <div class="col-7">
             <input type="text" class="form-control form-control-sm" formControlName="value">
         </div>
         }
         @if (isc_form.get('value') && k.value === 'Identifier') {
-        <div class="col-6">
+        <div class="col-5">
             <input type="text" class="form-control form-control-sm" formControlName="value">
         </div>
         }
         @if (isc_form.get('value') && k.value === 'Person') {
-        <div class="col-6">
+        <div class="col-5">
             <input type="text" class="form-control form-control-sm" formControlName="value" autocomplete="off">
             @if (cone_async) {
             <div>
@@ -77,8 +78,7 @@
                     @for (cone of cone_async | async; track cone) {
                     <li wfvsClickOutside (clickOutside)="close_cone()"
                         class="list-group-item list-group-item-action list-group-item-secondary py-0 text-start"
-                        (click)="select_person(cone)" (keyup)="select_person(cone)"
-                        tabindex="0" role="button">
+                        (click)="select_person(cone)" (keyup)="select_person(cone)" tabindex="0" role="button">
                         <small>{{cone.value}}</small>
                     </li>
                     }
@@ -88,7 +88,7 @@
         </div>
         }
         @if (isc_form.get('value') && k.value === 'Organization') {
-        <div class="col-8">
+        <div class="col-7">
             <wfvs-selector [form]="isc_form" [control_name]="'value'" wfvsPureOus placeholder="search ous ..."
                 (notice)="select_ou($event)">
                 <ng-container *wfvsOption="let item">{{ item.text }}</ng-container>
@@ -114,6 +114,7 @@
         <div class="col-2">
             <input type="text" class="form-control form-control-sm" formControlName="to" placeholder="YYYY-MM-DD">
         </div>
+        }
         }
         <div class="col-1 ms-auto">
             <!-- WARNING!!!-->

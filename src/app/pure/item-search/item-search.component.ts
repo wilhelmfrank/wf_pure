@@ -1,14 +1,14 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { AaService } from 'src/app/base/services/aa.service';
-import { public_filter } from 'src/app/pure/model/pure_queries';
-import { bool_query, fieldOptions, join_enum } from 'src/app/pure/model/pure_search';
+// import { public_filter } from 'src/app/isis/model/pure_queries';
+import { bool_query, bracketed_search_criterion, fieldOptions, join_enum, search_criterion } from 'src/app/pure/model/pure_search';
 import { ConeService } from 'src/app/pure/services/cone.service';
 import { ItemSearchCriterionComponent } from '../item-search-criterion/item-search-criterion.component';
-import { NgFor, NgIf, AsyncPipe, JsonPipe } from '@angular/common';
+import { NgFor, NgIf, AsyncPipe, JsonPipe, NgClass, NgStyle } from '@angular/common';
 import { ItemSearchBracketsComponent } from '../item-search-brackets/item-search-brackets.component';
 
 @Component({
@@ -16,7 +16,7 @@ import { ItemSearchBracketsComponent } from '../item-search-brackets/item-search
   templateUrl: './item-search.component.html',
   styleUrls: ['./item-search.component.scss'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgFor, ItemSearchCriterionComponent, ItemSearchBracketsComponent, NgIf, AsyncPipe, JsonPipe]
+  imports: [FormsModule, ReactiveFormsModule, NgFor, NgClass, NgStyle, ItemSearchCriterionComponent, ItemSearchBracketsComponent, NgIf, AsyncPipe, JsonPipe]
 })
 export class ItemSearchComponent implements OnInit, OnDestroy {
 
@@ -39,7 +39,7 @@ export class ItemSearchComponent implements OnInit, OnDestroy {
     this.dynamicForm = this.fb.group({
       fields: this.fb.array([])
     });
-    this.addFieldToFormArray();
+    this.addFieldToFormArray(0);
   }
 
   ngOnDestroy(): void {
@@ -48,78 +48,108 @@ export class ItemSearchComponent implements OnInit, OnDestroy {
   }
 
   createFormGroup() {
-    return this.fb.group({
-      join: 'AND',
-      filter: [],
-      sub_filter: [],
-    });
+    return this.fb.group(search_criterion);
   }
 
-  addFieldToFormArray() {
-    this.fields.push(this.createFormGroup());
+  addFieldToFormArray(index: number) {
+    this.fields.insert(index + 1, this.createFormGroup());
   }
 
   removeFieldFromFormArray(index: number) {
     this.fields.removeAt(index);
   }
 
-  notification(event: any, index: number) {
-    if (event.value === 'add') {
-      this.addFieldToFormArray();
-    } else if (event.value === 'remove') {
-      this.removeFieldFromFormArray(index);
-    } else if (event.value === 'brackets') {
-      this.fields.push(this.fb.group({brackets: this.fb.array([this.createFormGroup()])}));
+  add_remove_brackets(event: any) {
+    if (event.action === 'remove') {
+      this.removeFieldFromFormArray(event.index);
     }
   }
 
-  form_to_query() {
+  notification(event: any, index: number) {
+    if (event.value === 'add') {
+      this.addFieldToFormArray(index);
+    } else if (event.value === 'remove') {
+      this.removeFieldFromFormArray(index);
+    } else if (event.value === 'brackets') {
+      this.fields.removeAt(index);
+      //this.fields.insert(index, this.fb.group({inherit: event.control.value.join, brackets: this.fb.array([this.createFormGroup()])}));
+      //this.fields.at(index).patchValue({join: event.control.value.join, bracket: 'open'});
+      this.fields.insert(index, this.fb.group({ join: 'AND', bracket: 'open' }));
+      this.fields.insert(index + 1, this.fb.group(bracketed_search_criterion));
+      this.fields.insert(index + 2, this.fb.group({ join: 'AND', bracket: 'close' }));
+    }
+  }
+
+  indent(index: number) {
+    const open = this.fields.controls.findIndex(c => c.get('bracket')?.value === 'open');
+    const close = this.fields.controls.findIndex(c => c.get('bracket')?.value === 'close');
+    if (open < index && index < close) {
+      return { 'margin-left': '15%' }
+    }
+    return undefined;
+  }
+
+  form_to_query(ctrls: AbstractControl[]) {
     const boolquery: bool_query = {
       bool: {}
     };
-
+    /*
     if (!this.aa.token) {
       boolquery.bool['filter'] = public_filter;
     }
-    return this.fields.controls.reduce((q: bool_query, control) => {
-      const { join, filter, sub_filter, value, hidden_id, from, to } = control.value;
-      const clause = join_enum[join];
-      if (!q.bool[clause]) {
-        q.bool[clause] = [];
-      }
-      const query = fieldOptions.find(fo => fo.label.localeCompare(filter) === 0);
-      if (filter.localeCompare('Person') === 0) {
-        if (hidden_id) {
-          q.bool[(clause)].push(query?.query(sub_filter, hidden_id));
-        } else {
-          value ? q.bool[clause].push(query?.alt_query(sub_filter, value)) : null;
-        }
-      } else if (filter.localeCompare('Organization') === 0) {
-        if (hidden_id) {
-          q.bool[clause].push(query?.query(hidden_id));
-        } else {
-          value ? q.bool[clause].push(query?.alt_query(value)) : null;
-        }
-      } else if (filter.localeCompare('Genre') === 0) {
-        sub_filter ? q.bool[clause].push(query?.query(sub_filter)) : null;
-      } else if (filter.localeCompare('Date') === 0) {
-        let from_val, to_val;
-        if (from) {
-          from_val = from;
-        }
-        if (to) {
-          to_val = to;
-        }
-        q.bool[clause].push(query?.query(from_val, to_val));
+    */
+    return ctrls.reduce((q: bool_query, control) => {
+      if (control.get('bracket')) {
+        const bracketed = this.get_in_between();
+        this.form_to_query(bracketed);
       } else {
-        value ? q.bool[clause].push(query?.query(value)) : null;
+
+        const { join, filter, sub_filter, value, hidden_id, from, to } = control.value;
+        const clause = join_enum[join];
+        if (!q.bool[clause]) {
+          q.bool[clause] = [];
+        }
+        const query = fieldOptions.find((fo: { label: string; }) => fo.label.localeCompare(filter) === 0);
+        if (filter.localeCompare('Person') === 0) {
+          if (hidden_id) {
+            q.bool[(clause)].push(query?.query(sub_filter, hidden_id));
+          } else {
+            value ? q.bool[clause].push(query?.alt_query(sub_filter, value)) : null;
+          }
+        } else if (filter.localeCompare('Organization') === 0) {
+          if (hidden_id) {
+            q.bool[clause].push(query?.query(hidden_id));
+          } else {
+            value ? q.bool[clause].push(query?.alt_query(value)) : null;
+          }
+        } else if (filter.localeCompare('Genre') === 0) {
+          sub_filter ? q.bool[clause].push(query?.query(sub_filter)) : null;
+        } else if (filter.localeCompare('Date') === 0) {
+          let from_val, to_val;
+          if (from) {
+            from_val = from;
+          }
+          if (to) {
+            to_val = to;
+          }
+          q.bool[clause].push(query?.query(from_val, to_val));
+        } else {
+          value ? q.bool[clause].push(query?.query(value)) : null;
+        }
       }
       return q;
     }, boolquery)
   }
 
+  get_in_between() {
+    const open = this.fields.controls.findIndex(c => c.get('bracket')?.value === 'open');
+    const close = this.fields.controls.findIndex(c => c.get('bracket')?.value === 'close');
+    const in_between = this.fields.controls.slice(open + 1, close);
+    return in_between;
+  }
+
   show_query() {
-    const query = this.form_to_query();
+    const query = this.form_to_query(this.fields.controls);
     if (query.bool['should']) {
       query.bool['minimum_should_match'] = 1;
     }
@@ -131,7 +161,7 @@ export class ItemSearchComponent implements OnInit, OnDestroy {
   }
 
   search() {
-    const query = this.form_to_query();
+    const query = this.form_to_query(this.fields.controls);
     if (query.bool['should']) {
       query.bool['minimum_should_match'] = 1;
     }

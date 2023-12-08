@@ -1,4 +1,4 @@
-import { Dialog } from '@angular/cdk/dialog';
+import { Dialog, DialogConfig } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { catchError, EMPTY, switchMap } from 'rxjs';

@@ -4,12 +4,27 @@
             @for (field of fields.controls; track field; let i = $index) {
             <div>
                 <div [formGroupName]="i">
-                    @if (fields.controls[i].get('join')) {
-                    <wfvs-item-search-criterion [isc_form]="$any(fields).controls[i]" [array_index]="i"
-                        (notice)="notification($event, i)"></wfvs-item-search-criterion>
+                    @if (fields.controls[i].get('bracket')?.value === 'open') {
+                        <div style="margin-left: 10%;">
+                            <wfvs-item-search-criterion [isc_form]="$any(field)" [array_index]="i"
+                            (notice)="notification($event, i)"></wfvs-item-search-criterion>(
+                        </div>
+                    } @else if (fields.controls[i].get('bracket')?.value === 'close') {
+                        <div style="margin-left: 10%;">
+                            )
+                        </div>
                     } @else {
-                        <wfvs-item-search-brackets [search_form]="dynamicForm" [array_index]="i"></wfvs-item-search-brackets>
+                        <div [ngStyle]="indent(i)">
+                            <wfvs-item-search-criterion [isc_form]="$any(field)" [array_index]="i"
+                            (notice)="notification($event, i)"></wfvs-item-search-criterion>
+                        </div>
                     }
+                    <!-- @else {
+                    <div style="margin-left: 10%;">
+                        <wfvs-item-search-brackets [search_form]="dynamicForm"
+                            [array_index]="i" (notice)="add_remove_brackets($event)"></wfvs-item-search-brackets>
+                    </div>
+                    }-->
                 </div>
             </div>
             }

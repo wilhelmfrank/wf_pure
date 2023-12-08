@@ -1,4 +1,6 @@
 [data-bs-theme=light] {
+    --bs-link-color: #{$gray-700};
+    --bs-link-hover-color: #{$info-text-emphasis};
 
     .form-control,
     .form-select {
@@ -19,6 +21,18 @@
     .list-group {
         --bs-list-group-action-hover-bg: var(--bs-secondary-bg);
     }
+
+    .mat-mdc-chip.mat-mdc-standard-chip {
+        --mdc-chip-container-height: 24px;
+        background-color: whitesmoke;
+        border: 1px solid lightgray;
+      } 
+
+      .custom_color {
+        height: 74px;
+        background-color: whitesmoke;
+    }
+    
 }
 
 [data-bs-theme=dark] {
@@ -49,4 +63,16 @@
         .list-group {
             --bs-list-group-action-hover-bg: var(--bs-gray-700);
         }
+
+        .mat-mdc-chip.mat-mdc-standard-chip {
+            --mdc-chip-container-height: 24px;
+            background-color: darkgray;
+            border: 1px solid gray;
+          } 
+
+          .custom_color {
+            height: 74px;
+            background-color: darkslategray
+        }
+        
 }

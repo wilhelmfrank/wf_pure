@@ -31,7 +31,7 @@ export class HeadComponent {
     const search_term = this.search_form.get('text')?.value;
     if (search_term) {
       const query = { query_string: { query: search_term } };
-      this.router.navigateByUrl('/isis/pure', {onSameUrlNavigation: 'reload', state: {query}});
+      this.router.navigateByUrl('/', {onSameUrlNavigation: 'reload', state: {query}});
     }
     this.search_form.controls['text'].patchValue('');
   }

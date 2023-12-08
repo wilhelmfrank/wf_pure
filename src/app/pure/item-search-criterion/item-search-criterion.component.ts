@@ -40,8 +40,6 @@ export class ItemSearchCriterionComponent {
 
   public cone_async: Observable<any> | undefined;
 
-  control = new FormControl('');
-
   joinOptions = Object.keys(join_enum);
 
   fieldOptions = fieldOptions;
@@ -74,6 +72,14 @@ export class ItemSearchCriterionComponent {
 
   join(val: string) {
     this.selectedJoin = val;
+  }
+
+  get brackets() {
+    return this.isc_form.get('bracket') as FormControl;
+  }
+
+  get first_in_brackets() {
+    return this.isc_form.get('first_in_brackets')?.value;
   }
 
   getFormControl(validator: ValidatorFn | null) {
@@ -125,7 +131,7 @@ export class ItemSearchCriterionComponent {
   }
 
   addBracketsToFormArray() {
-    this.notice.emit({ value: 'brackets'});
+    this.notice.emit({ value: 'brackets', control: this.isc_form });
   }
 
   close_cone() {
