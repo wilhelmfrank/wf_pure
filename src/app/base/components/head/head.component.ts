@@ -36,4 +36,16 @@ export class HeadComponent {
     this.search_form.controls['text'].patchValue('');
   }
 
+  help() {
+    alert('help ya self!');
+  }
+
+  tools() {
+    alert('select from tools ...');
+  }
+
+  switch_lang() {
+    alert('select lasagne')
+  }
+
 }

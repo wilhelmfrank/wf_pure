@@ -11,7 +11,7 @@ export class FootComponent {
 
   name = pj.name;
   version = pj.version;
-  home = 'https://github.com/wilhelmfrank/wfvs#readme';
+  home = 'https://github.com/wilhelmfrank/wf_pure#readme';
   author = 'wilhelmina frank von stein';
   angular_uri = 'https://angular.io';
   node_uri = 'https://nodejs.org';

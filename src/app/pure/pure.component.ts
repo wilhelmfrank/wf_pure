@@ -6,7 +6,7 @@ import { AaService } from 'src/app/base/services/aa.service';
 import { DateAggregation, NestedAggregation, TermsAggregation } from 'src/app/shared/model/aggs-params';
 import { AggregationService } from 'src/app/shared/services/aggregation.service';
 import { FacetComponent } from 'src/app/shared/components/facet/facet.component';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { FacetComponent as FacetComponent_1 } from 'src/app/shared/components/facet/facet.component';
 import { ListItemViewComponent } from './list-item-view/list-item-view.component';
 import { NgClass, NgFor, NgIf, AsyncPipe } from '@angular/common';
@@ -27,6 +27,7 @@ import { PaginationDirective } from 'src/app/shared/directives/pagination.direct
     ListItemViewComponent,
     FacetComponent_1,
     AsyncPipe,
+    RouterLink
   ],
 })
 export class PureComponent implements OnInit, AfterViewInit {
@@ -215,5 +216,9 @@ export class PureComponent implements OnInit, AfterViewInit {
     this.current_page = 1;
     this.current_query = this.update_query(query.query);
     this.items(this.current_query);
+  }
+
+  do_some_navigation(target: string) {
+    alert('navigating 2 ' + target);
   }
 }

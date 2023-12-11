@@ -13,15 +13,25 @@
       <form class="col-4" [formGroup]="search_form" (ngSubmit)="search()">
         <div class="input-group input-group-sm border w-50">
           <div class="input-group-text border-0"><i class="bi-search"></i></div>
-          <input id="text" class="form-control border-0" type="search" formControlName="text"
-          placeholder="Search" aria-label="Search">
-          <div class="input-group-text border-0"><a wfvsTooltip class="btn" data-bs-toggle="tooltip" data-bs-title="advanced search" role="button" [routerLink]="['/as']"><i class="bi-binoculars"></i></a>
+          <input id="text" class="form-control border-0" type="search" formControlName="text" placeholder="Search"
+            aria-label="Search">
+          <div class="input-group-text border-0"><a wfvsTooltip class="btn" data-bs-toggle="tooltip"
+              data-bs-title="advanced search" role="button" [routerLink]="['/as']"><i class="bi-binoculars"></i></a>
           </div>
-        </div>  
+        </div>
       </form>
       <div class="d-flex col-4 justify-content-end align-items-center">
-        <wfvs-switch-bs-theme class="me-2"></wfvs-switch-bs-theme>
-        <wfvs-aa></wfvs-aa>
+        <wfvs-switch-bs-theme class="me-4"></wfvs-switch-bs-theme>
+        <div class="me-4">
+          <a [routerLink]="[]" class="nav-link" (click)="help()"><i class="bi-question-circle"></i></a>
+        </div>
+        <div class="me-4">
+          <a [routerLink]="[]" class="nav-link" (click)="tools()"><i class="bi-grid-3x3-gap-fill"></i></a>
+        </div>
+        <wfvs-aa class="me-4"></wfvs-aa>
+        <div>
+          <a [routerLink]="[]" class="nav-link" (click)="switch_lang()"><img class="" height="16px" width="auto" src="assets/images/flag_gb.svg" /></a>
+        </div>
       </div>
     </div>
   </div>
