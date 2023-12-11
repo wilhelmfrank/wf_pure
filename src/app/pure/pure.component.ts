@@ -12,6 +12,7 @@ import { ListItemViewComponent } from './list-item-view/list-item-view.component
 import { NgClass, NgFor, NgIf, AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PaginationDirective } from 'src/app/shared/directives/pagination.directive';
+import { ListItemNextComponent } from './list-item-next/list-item-next.component';
 
 @Component({
   selector: 'wfvs-pure',
@@ -25,6 +26,7 @@ import { PaginationDirective } from 'src/app/shared/directives/pagination.direct
     NgFor,
     NgIf,
     ListItemViewComponent,
+    ListItemNextComponent,
     FacetComponent_1,
     AsyncPipe,
     RouterLink

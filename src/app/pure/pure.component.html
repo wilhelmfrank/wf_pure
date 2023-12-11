@@ -85,9 +85,8 @@
                 </div>-->
                 <div class="list-group list-group-flush">
                     @for (item of list; track item) {
-                    <div class="list-group-item list-group-item-action py-1" (click)="show(item)" (keyup)="show(item)"
-                        tabindex="0" role="button">
-                        <wfvs-list-item-view [item]="item" [authenticated]="aa.isLoggedIn"></wfvs-list-item-view>
+                    <div class="list-group-item list-group-item-action py-1">
+                        <pure-list-item-next [item]="item" [authenticated]="aa.isLoggedIn"></pure-list-item-next>
                     </div>
                     }
                 </div>
