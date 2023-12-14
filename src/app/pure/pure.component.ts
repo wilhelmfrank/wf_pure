@@ -10,7 +10,7 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { FacetComponent as FacetComponent_1 } from 'src/app/shared/components/facet/facet.component';
 import { ListItemViewComponent } from './list-item-view/list-item-view.component';
 import { NgClass, NgFor, NgIf, AsyncPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationDirective } from 'src/app/shared/directives/pagination.directive';
 import { ListItemNextComponent } from './list-item-next/list-item-next.component';
 
@@ -22,6 +22,7 @@ import { ListItemNextComponent } from './list-item-next/list-item-next.component
   imports: [
     PaginationDirective,
     FormsModule,
+    ReactiveFormsModule,
     NgClass,
     NgFor,
     NgIf,
@@ -35,9 +36,12 @@ import { ListItemNextComponent } from './list-item-next/list-item-next.component
 export class PureComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(FacetComponent) facets!: QueryList<FacetComponent>;
+  @ViewChildren(ListItemNextComponent) list_items!: QueryList<ListItemNextComponent>;
 
   result_list: Observable<ItemVersionVO[]> | undefined;
   number_of_results: number | undefined;
+
+  select_all = new FormControl(false);
 
   // Facets
   genre_obs!: Observable<any[]>;
@@ -222,5 +226,13 @@ export class PureComponent implements OnInit, AfterViewInit {
 
   do_some_navigation(target: string) {
     alert('navigating 2 ' + target);
+  }
+
+  select_all_items(event: any) {
+    if (event.target.checked) {
+      this.list_items.map(li => li.check_box.setValue(true));
+    } else {
+      this.list_items.map(li => li.check_box.setValue(false));
+    }
   }
 }

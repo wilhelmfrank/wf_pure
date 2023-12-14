@@ -2,11 +2,12 @@ import { Component, Input, inject } from '@angular/core';
 import { ItemVersionVO } from '../model/inge';
 import { JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'pure-list-item-next',
   standalone: true,
-  imports: [NgIf, NgFor, NgClass, JsonPipe],
+  imports: [NgIf, NgFor, NgClass, JsonPipe, FormsModule, ReactiveFormsModule],
   templateUrl: './list-item-next.component.html',
   styleUrl: './list-item-next.component.scss'
 })
@@ -17,6 +18,8 @@ export class ListItemNextComponent {
   authenticated = false;
 
   router = inject(Router);
+
+  check_box = new FormControl(false);
 
   no_name = 'n/a';
 

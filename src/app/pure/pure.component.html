@@ -80,12 +80,15 @@
         <div class="col-9">
             @if (result_list | async; as list) {
             <div class="card mt-3">
-                <!--<div class="card-header">
-                    <h2 class="card-title">{{number_of_results}} items</h2>
-                </div>-->
+                <div class="card-header">
+                    <div class="form-check ms-3">
+                        <input #input [formControl]="select_all" class="form-check-input" type="checkbox" value="" id="form_check" (change)="select_all_items($event)">
+                        <label for="form_check" [innerHTML]="input.checked ? 'deselect' : 'select all'"></label>
+                    </div>
+                </div>
                 <div class="list-group list-group-flush">
                     @for (item of list; track item) {
-                    <div class="list-group-item list-group-item-action py-1">
+                    <div class="list-group-item py-0">
                         <pure-list-item-next [item]="item" [authenticated]="aa.isLoggedIn"></pure-list-item-next>
                     </div>
                     }
