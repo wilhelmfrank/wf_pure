@@ -5,6 +5,7 @@ import { PureComponent } from "../pure/pure.component";
 import { ItemSearchComponent } from "../pure/item-search/item-search.component";
 import { ItemFormComponent } from "../pure/item-edit-next/form/item-form/item-form.component copy";
 import { itemResolver } from "../pure/services/item--resolver";
+import { DynTreeComponent } from "../shared/components/dyn-tree.component";
 
 export const BASE_ROUTES: Route[] = [
   {
@@ -15,6 +16,10 @@ export const BASE_ROUTES: Route[] = [
   {
     path: 'start',
     component: PureComponent
+  },
+  {
+    path: 'ou_tree',
+    component: DynTreeComponent
   },
   {
     path: 'as', component: ItemSearchComponent, data: {

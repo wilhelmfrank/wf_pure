@@ -31,7 +31,7 @@ export interface PersonResource {
 })
 export class ConePersonsService {
 
-  rest_uri = environment.dowm_url.concat('/pure/cone');
+  rest_uri = environment.dowm_url.concat('/isis/cone');
 
   constructor(
     private http: HttpClient
