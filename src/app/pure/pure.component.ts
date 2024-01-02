@@ -42,6 +42,14 @@ export class PureComponent implements OnInit, AfterViewInit {
   number_of_results: number | undefined;
 
   select_all = new FormControl(false);
+  select_pages_2_display = new FormControl(10);
+
+  pages_2_display = [
+    {value: 5, label: '5'},
+    {value: 10, label: '10'},
+    {value: 20, label: '20'},
+    {value: 50, label: '50'},
+  ];
 
   // Facets
   genre_obs!: Observable<any[]>;
@@ -222,10 +230,6 @@ export class PureComponent implements OnInit, AfterViewInit {
     this.current_page = 1;
     this.current_query = this.update_query(query.query);
     this.items(this.current_query);
-  }
-
-  do_some_navigation(target: string) {
-    alert('navigating 2 ' + target);
   }
 
   select_all_items(event: any) {
