@@ -5,12 +5,11 @@ import { NavigationService } from './shared/services/navigation.service';
 import { HeadComponent } from './base/components/head/head.component';
 import { FootComponent } from './base/components/foot/foot.component';
 import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
-import { TopnavComponent } from './shared/components/topnav/topnav.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeadComponent, FootComponent, SidenavComponent, TopnavComponent],
+  imports: [CommonModule, RouterOutlet, HeadComponent, FootComponent, SidenavComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

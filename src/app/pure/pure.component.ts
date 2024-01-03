@@ -13,6 +13,7 @@ import { NgClass, NgFor, NgIf, AsyncPipe } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationDirective } from 'src/app/shared/directives/pagination.directive';
 import { ListItemNextComponent } from './list-item-next/list-item-next.component';
+import { TopnavComponent } from '../shared/components/topnav/topnav.component';
 
 @Component({
   selector: 'wfvs-pure',
@@ -30,7 +31,8 @@ import { ListItemNextComponent } from './list-item-next/list-item-next.component
     ListItemNextComponent,
     FacetComponent_1,
     AsyncPipe,
-    RouterLink
+    RouterLink,
+    TopnavComponent
   ],
 })
 export class PureComponent implements OnInit, AfterViewInit {
