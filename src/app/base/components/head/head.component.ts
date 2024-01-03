@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AaService } from 'src/app/base/services/aa.service';
 import { Router, RouterLink } from '@angular/router';
@@ -15,7 +15,23 @@ import { TooltipDirective } from 'src/app/shared/directives/tooltip.directive';
 })
 export class HeadComponent {
 
-  user_name = 'wilma stein'
+  headerHeight: number = 0;
+  header!: HTMLElement;
+  newHeight: any;
+
+  ngOnInit() {
+    const nav = document.getElementById('header');
+    if (nav) {
+      this.header = nav;
+    }
+    this.headerHeight = this.header.offsetHeight as number;
+  }
+
+  ngAfterViewInit() {
+    document.addEventListener('scroll', (ev) => {
+      this.resizeHeader(ev);
+    });
+  }
 
   search_form = this.form_builder.group({
     text: '',
@@ -34,6 +50,24 @@ export class HeadComponent {
       this.router.navigateByUrl('/', {onSameUrlNavigation: 'reload', state: {query}});
     }
     this.search_form.controls['text'].patchValue('');
+  }
+
+  resizeHeader(event: any) {
+    this.newHeight = this.headerHeight - window.pageYOffset / 2;
+
+    if (this.newHeight < 50) {
+      this.newHeight = 50;
+    }
+
+    let fontsize = this.newHeight / this.headerHeight;
+    if (fontsize >= 0.5) {
+      const span = this.header.getElementsByTagName('span');
+      this.header.style.fontSize = fontsize + 'em';
+    }
+    // if (this.newHeight >= this.headerHeight) {
+      this.header.style.height = this.newHeight + 'px';
+    // }
+
   }
 
   help() {
