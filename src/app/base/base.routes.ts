@@ -1,5 +1,4 @@
 import { Route } from "@angular/router";
-import { StartComponent } from "./components/start/start.component";
 import { PageNotFoundComponent } from "../shared/components/page-not-found/page-not-found.component";
 import { PureComponent } from "../pure/pure.component";
 import { ItemSearchComponent } from "../pure/item-search/item-search.component";
