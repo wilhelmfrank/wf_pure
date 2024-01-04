@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'wfvs-switch-bs-theme',
     templateUrl: './switch-bs-theme.component.html',
     styleUrls: ['./switch-bs-theme.component.scss'],
-    standalone: true
+    standalone: true,
+    imports: [RouterLink]
 })
 export class SwitchBsThemeComponent {
 

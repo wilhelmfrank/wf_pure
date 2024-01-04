@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.scss'
+  styleUrl: './no_sidenav.component.scss'
 })
 export class SidenavComponent implements AfterViewInit {
 
@@ -14,19 +14,21 @@ export class SidenavComponent implements AfterViewInit {
   renderer = inject(Renderer2);
 
   ngAfterViewInit(): void {
-    this.col();
+    this.collapse();
   }
 
+  /*
   ex_col() {
     const expanded = this.nav.nativeElement.classList.contains('collapsed');
     this.renderer[expanded ? 'removeClass' : 'addClass'](this.nav.nativeElement, 'collapsed');
   }
+  */
 
-  ex() {
+  expand() {
     this.renderer.removeClass(this.nav.nativeElement, 'collapsed');
   }
 
-  col() {
+  collapse() {
     this.renderer.addClass(this.nav.nativeElement, 'collapsed');
   }
 }

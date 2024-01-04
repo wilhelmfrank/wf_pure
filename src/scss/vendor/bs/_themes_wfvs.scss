@@ -33,6 +33,10 @@
         background-color: whitesmoke;
     }
 
+    .list-item-bg {
+        background-color: whitesmoke;
+    }
+
 }
 
 [data-bs-theme=dark] {
@@ -73,6 +77,10 @@
     .custom_color {
         height: 74px;
         background-color: darkslategray
+    }
+
+    .list-item-bg {
+        background-color: darkslategray;
     }
 
 }

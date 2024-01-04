@@ -3,12 +3,12 @@
     <a class="navbar-brand" [routerLink]="['/']">
       <img class="" height="100px" width="auto" src="assets/images/mpg_blue.svg" />
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header_nav"
+      aria-controls="header_nav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <!-- d-lg-flex reqired! correspondent to navbar-expand-lg -->
-    <div class="collapse navbar-collapse d-lg-flex" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse d-lg-flex" id="header_nav">
       <span class="nav col-4 align-items-center justify-content-center">MPG.PuRe</span>
       <form class="col-4" [formGroup]="search_form" (ngSubmit)="search()">
         <div class="input-group input-group-sm border w-50">
