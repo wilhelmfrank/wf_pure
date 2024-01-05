@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Observable, filter, map, startWith, tap } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Observable, filter, fromEvent, map, startWith, tap } from 'rxjs';
 import { ItemVersionVO } from 'src/app/pure/model/inge';
 import { IngeCrudService } from 'src/app/pure/services/inge-crud.service';
 import { AaService } from 'src/app/base/services/aa.service';
@@ -14,6 +14,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationDirective } from 'src/app/shared/directives/pagination.directive';
 import { ListItemNextComponent } from './list-item-next/list-item-next.component';
 import { TopnavComponent } from '../shared/components/topnav/topnav.component';
+import { T } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'wfvs-pure',
@@ -39,6 +40,8 @@ export class PureComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(FacetComponent) facets!: QueryList<FacetComponent>;
   @ViewChildren(ListItemNextComponent) list_items!: QueryList<ListItemNextComponent>;
+  fixed_nav!: HTMLElement;
+  scroll_pos: any;
 
   result_list: Observable<ItemVersionVO[]> | undefined;
   number_of_results: number | undefined;
@@ -47,10 +50,10 @@ export class PureComponent implements OnInit, AfterViewInit {
   select_pages_2_display = new FormControl(10);
 
   pages_2_display = [
-    {value: 5, label: '5'},
-    {value: 10, label: '10'},
-    {value: 20, label: '20'},
-    {value: 50, label: '50'},
+    { value: 5, label: '5' },
+    { value: 10, label: '10' },
+    { value: 20, label: '20' },
+    { value: 50, label: '50' },
   ];
 
   // Facets
@@ -81,6 +84,12 @@ export class PureComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
+
+    const top_nav = document.getElementById('fixed_nav');
+    if (top_nav) {
+      this.fixed_nav = top_nav;
+      console.log('top pos', this.fixed_nav.scrollTop)
+    }
 
     const publishers: TermsAggregation = {
       terms: {
@@ -135,6 +144,10 @@ export class PureComponent implements OnInit, AfterViewInit {
         this.current_query = this.update_query({ bool: { filter: [] } });
         this.items(this.current_query);
       }
+    });
+    fromEvent(this.fixed_nav, 'scroll').subscribe((e: any) => {
+      this.scroll_pos = e?.target['scrollTop'];
+      console.log('scroll top', this.scroll_pos)
     });
   }
 
