@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './sidenav.component.html',
-  styleUrl: './no_sidenav.component.scss'
+  styleUrl: './sidenav.component.scss'
 })
 export class SidenavComponent implements AfterViewInit {
 

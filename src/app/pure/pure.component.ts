@@ -40,8 +40,6 @@ export class PureComponent implements OnInit, AfterViewInit {
 
   @ViewChildren(FacetComponent) facets!: QueryList<FacetComponent>;
   @ViewChildren(ListItemNextComponent) list_items!: QueryList<ListItemNextComponent>;
-  fixed_nav!: HTMLElement;
-  scroll_pos: any;
 
   result_list: Observable<ItemVersionVO[]> | undefined;
   number_of_results: number | undefined;
@@ -84,12 +82,6 @@ export class PureComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-
-    const top_nav = document.getElementById('fixed_nav');
-    if (top_nav) {
-      this.fixed_nav = top_nav;
-      console.log('top pos', this.fixed_nav.scrollTop)
-    }
 
     const publishers: TermsAggregation = {
       terms: {
@@ -144,10 +136,6 @@ export class PureComponent implements OnInit, AfterViewInit {
         this.current_query = this.update_query({ bool: { filter: [] } });
         this.items(this.current_query);
       }
-    });
-    fromEvent(this.fixed_nav, 'scroll').subscribe((e: any) => {
-      this.scroll_pos = e?.target['scrollTop'];
-      console.log('scroll top', this.scroll_pos)
     });
   }
 

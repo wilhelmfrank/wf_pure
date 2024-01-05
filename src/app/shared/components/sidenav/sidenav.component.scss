@@ -1,77 +1,21 @@
-  .navbar {
-    background-color: white;
-    bottom: 10%;
-    left: 10%;
-    position: fixed;
-    top: 10%;
-    width: 200px;
-    z-index: 8;
-    overflow: hidden;
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;
-  }
-  
-  .navbar.collapsed {
-    width: 60px;
-  }
-  
-  .navbar.collapsed .bi {
-    font-size: 1.25rem;
-  }
-  
-  .navbar.collapsed .nav-label {
-    display: none;
-  }
-  
-  .btn-expand-collapse {
-      position: absolute;
-      display: block;
-      left: 0px;
-      bottom:0;
-      width: 100%;
-      padding: 8px 0;
-      border-top:solid 1px #666;
-      color: grey;
-      font-size: 20px;
-      text-align: center;
-  }
-  
-  .btn-expand-collapse:hover,
-  .btn-expand-collapse:focus {
-      background-color: #222;
-      color: white;
-  }
-  
-  .btn-expand-collapse:active {
-      background-color: #111;
-  }
-  
-  .nav,
-  .nav .nav_item {
-    margin:0; padding:0;
-    list-style: none;
-  }
-  
-  .nav .nav_item a {
-    display: block;
-    padding: 10px 18px;
-    text-align: left;
-    border-bottom:solid 1px #ccc;
-    color: #444;
-  }
-  
-  .nav .nav_item a:hover {
-    background-color: #ccc;
-    text-decoration: none;
-    color: #444;
-  }
-  
-  .nav .nav_item a .bi {
-    margin-right: 6px;
-  }
-  
-  .nav  .nav_item a:hover .bi {
-    color: orangered;
-  }
-  
+.navbar {
+  bottom: 45%;
+  left: 10%;
+  position: fixed;
+  top: 15%;
+  width: 250px;
+  z-index: 16;
+  overflow: hidden;
+}
+
+.navbar.collapsed {
+  width: 60px;
+}
+
+.navbar.collapsed .bi {
+  font-size: 1.25rem;
+}
+
+.navbar.collapsed .nav-label {
+  display: none;
+}

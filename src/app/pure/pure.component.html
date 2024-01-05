@@ -1,5 +1,5 @@
 <div class="container-fluid w-75">
-    <div #fixed_nav id="fixed_nav" class="row align-items-center nav_pos w-75 bg-body">
+    <div #fixed_nav id="fixed_nav" class="row align-items-center nav_pos bg-body">
         <div class="col-sm-4 ps-0">
             <pure-topnav></pure-topnav>
         </div>
@@ -55,10 +55,10 @@
             <!--<label for="pageSize"><small>&nbsp; per Page</small></label>-->
         </div>
     </div>
-    <div class="mt-5 row">
-        <div class="col-9">
+    <div class="row">
+        <div class="col-lg-9 col-sm-12">
             @if (result_list | async; as list) {
-            <div class="card mt-5">
+            <div class="card">
                 <div class="card-header">
                     <div class="form-check ms-3">
                         <input #input [formControl]="select_all" class="form-check-input" type="checkbox" value=""
@@ -77,8 +77,8 @@
             </div>
             }
         </div>
-        <div class="col-3">
-            <div class="card mt-5">
+        <div class="col-3 d-none d-lg-block">
+            <div class="card">
                 <div class="card-header">
                 </div>
                 <div class="card-body">
