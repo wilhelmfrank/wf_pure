@@ -120,7 +120,7 @@ export const ou_suggest = (val: string) => ({
         ou_chain: {
             type: 'keyword',
             script: {
-                source: 'if (doc["parentAffiliation.name.keyword"].size() > 0) {emit(doc["name.keyword"].value + " - " + doc["parentAffiliation.name.keyword"].value)} else {emit("Max Planck Society")}'
+                source: 'if (doc["parentAffiliation.name.keyword"].size() > 0) {emit(doc["name.keyword"].value + " - " + doc["parentAffiliation.name.keyword"].value)} else {emit(doc["name.keyword"].value)}'
             }
         },
         mother: {
