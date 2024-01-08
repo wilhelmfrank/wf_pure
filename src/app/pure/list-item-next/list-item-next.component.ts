@@ -3,11 +3,12 @@ import { ItemVersionVO } from '../model/inge';
 import { JsonPipe, NgClass, NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PopoverDirective } from 'src/app/shared/directives/popover.directive';
 
 @Component({
   selector: 'pure-list-item-next',
   standalone: true,
-  imports: [NgIf, NgFor, NgClass, JsonPipe, FormsModule, ReactiveFormsModule],
+  imports: [NgIf, NgFor, NgClass, JsonPipe, FormsModule, ReactiveFormsModule, PopoverDirective],
   templateUrl: './list-item-next.component.html',
   styleUrl: './list-item-next.component.scss'
 })
@@ -25,7 +26,7 @@ export class ListItemNextComponent {
   no_name = 'n/a';
 
   get abstract() {
-    
+
     if (this.item && this.item?.metadata?.abstracts?.length > 0) {
       return this.item?.metadata.abstracts[0].value;
     } else {

@@ -62,11 +62,7 @@
                             [innerHtml]="'some stylish citation from a non-existent endpoint ...'"></small>
                     </div>
                     <div class="d-flex flex-sm-row mt-2">
-                        <button type="button" class="btn btn-secondary" data-bs-toggle="popover"
-                            data-bs-placement="right" data-bs-custom-class="custom-popover"
-                            data-bs-title="Custom popover" data-bs-content="This popover is themed via CSS variables.">
-                            Custom popover
-                        </button>
+                        <a purePopover class="btn btn-sm" tabindex="0" [attr.title]="item?.metadata?.title" data-bs-toggle="popover" [attr.data-bs-content]="abstract">Abstract</a>
                     </div>
                 </div>
                 <div class="col-sm-3 overflow-hidden">

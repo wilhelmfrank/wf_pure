@@ -3,7 +3,7 @@ import { AfterViewInit, Directive, ElementRef, OnDestroy } from '@angular/core';
 declare const bootstrap: any;
 
 @Directive({
-    selector: '[wfvsTooltip]',
+    selector: '[pureTooltip]',
     standalone: true
 })
 export class TooltipDirective implements AfterViewInit, OnDestroy{
