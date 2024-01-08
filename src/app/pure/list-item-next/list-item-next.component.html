@@ -1,4 +1,4 @@
-<div class="container-fluid border-bottom list-item-bg">
+<div class="container-fluid list-item-bg" [ngClass]="{'border-bottom': !last_item}">
     <div class="card">
         <div class="card-header pt-2">
             <div class="d-flex flex-sm-row align-items-center justify-content-start">
@@ -8,15 +8,15 @@
                     </div>
                 </form>
                 <div class="me-2">
-                    <span class="badge bg-primary" [innerHtml]="'whatever'">
+                    <span class="badge badge-blue" [innerHtml]="'whatever'">
                     </span>
                 </div>
                 <div class="me-2">
-                    <span class="badge bg-secondary" [innerHtml]="item?.metadata?.dateCreated">
+                    <span class="badge badge-green" [innerHtml]="item?.metadata?.dateCreated">
                     </span>
                 </div>
                 <div class="">
-                    <span class="badge bg-warning" [innerHtml]="'OA Gold'">
+                    <span class="badge badge-yellow" [innerHtml]="'OA Gold'">
                     </span>
                 </div>
             </div>

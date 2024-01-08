@@ -53,7 +53,7 @@ export class HeadComponent {
   }
 
   resizeHeader(event: any) {
-    this.newHeight = this.headerHeight - window.pageYOffset / 2;
+    this.newHeight = this.headerHeight - window.scrollY / 2;
 
     if (this.newHeight < 50) {
       this.newHeight = 50;
@@ -61,7 +61,6 @@ export class HeadComponent {
 
     let fontsize = this.newHeight / this.headerHeight;
     if (fontsize >= 0.5) {
-      const span = this.header.getElementsByTagName('span');
       this.header.style.fontSize = fontsize + 'em';
     }
     // if (this.newHeight >= this.headerHeight) {

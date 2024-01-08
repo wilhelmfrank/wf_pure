@@ -6,6 +6,9 @@
   width: 250px;
   z-index: 16;
   overflow: hidden;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 .navbar.collapsed {

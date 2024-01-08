@@ -14,6 +14,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 export class ListItemNextComponent {
 
   @Input() item: ItemVersionVO | undefined;
+  @Input() last_item!: boolean;
   @Input()
   authenticated = false;
 

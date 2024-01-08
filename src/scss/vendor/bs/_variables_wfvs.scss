@@ -5,6 +5,7 @@
 @import "../../../../node_modules/bootstrap/scss/functions";
 
 // 2. Include any default variable overrides here
+@import "../colors/mpdl";
 @import "../colors/paletton_ikb10";
 
 $primary: $ikb-primary-0;
@@ -33,6 +34,7 @@ $border-color-dark: $gray-600;
 
 // 5. Include remainder of required parts
 @import "../../../../node_modules/bootstrap/scss/maps";
+
 @import "../../../../node_modules/bootstrap/scss/mixins";
 @import "../../../../node_modules/bootstrap/scss/root";
 
