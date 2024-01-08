@@ -4,7 +4,8 @@
             <div class="d-flex flex-sm-row align-items-center justify-content-start">
                 <form class="me-2">
                     <div class="form-check">
-                        <input [formControl]="check_box" class="form-check-input" type="checkbox" value="" id="form_check">
+                        <input [formControl]="check_box" class="form-check-input" type="checkbox" value=""
+                            id="form_check">
                     </div>
                 </form>
                 <div class="me-2">
@@ -25,7 +26,8 @@
             <div class="d-flex flex-sm-row">
                 <div class="col-sm-9">
                     <div class="d-flex flex-sm-row align-items-center">
-                        <h4 class="col-10 text-truncate" [innerHtml]="item?.metadata?.title" (click)="show()" style="cursor: pointer;"></h4>
+                        <h4 class="col-10 text-truncate" [innerHtml]="item?.metadata?.title" (click)="show()"
+                            style="cursor: pointer;"></h4>
                     </div>
                     <div class="d-flex flex-sm-row">
                         @for (author of first_three_authors; track author; let i = $index) {
@@ -54,11 +56,17 @@
                     <!--<div class="d-flex flex-sm-row">
                         <small class="col-10 text-muted text-truncate" [innerHtml]="abstract"></small>
                     </div>-->
-                    <div class="d-flex flex-sm-row">
-                        <small class="col-10 text-muted text-truncate" [innerHtml]="'At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'"></small>
+                    <div class="d-flex flex-sm-row mt-3">
+                        <i class="col-1 bi bi-quote text-center"></i>
+                        <small class="col-9 text-muted text-truncate"
+                            [innerHtml]="'some stylish citation from a non-existent endpoint ...'"></small>
                     </div>
-                    <div class="d-flex flex-sm-row">
-                        <small class="col-10 text-muted text-truncate" [innerHtml]="'Abstract'"></small>
+                    <div class="d-flex flex-sm-row mt-2">
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="popover"
+                            data-bs-placement="right" data-bs-custom-class="custom-popover"
+                            data-bs-title="Custom popover" data-bs-content="This popover is themed via CSS variables.">
+                            Custom popover
+                        </button>
                     </div>
                 </div>
                 <div class="col-sm-3 overflow-hidden">

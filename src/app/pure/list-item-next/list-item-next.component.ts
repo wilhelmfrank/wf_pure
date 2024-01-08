@@ -25,10 +25,11 @@ export class ListItemNextComponent {
   no_name = 'n/a';
 
   get abstract() {
+    
     if (this.item && this.item?.metadata?.abstracts?.length > 0) {
       return this.item?.metadata.abstracts[0].value;
     } else {
-      return null;
+      return 'n/a';
     }
   }
 

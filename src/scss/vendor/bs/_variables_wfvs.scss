@@ -16,7 +16,7 @@ $input-focus-box-shadow: 0 0 0 0 transparent;
 $form-select-focus-box-shadow: 0 0 0 0 transparent;
 $form-check-input-focus-box-shadow: 0 0 0 0 transparent;
 $list-group-border-width: 0;
-//$form-check-input-checked-bg-color:       transparent;
+$form-check-input-checked-bg-color: $mpdl-iseo1;
 //$form-check-input-checked-border-color:   $ikb-complement-2;
 //$form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$ikb-complement-2}'/></svg>");
 
@@ -64,7 +64,7 @@ $border-color-dark: $gray-600;
 // @import "../../../../node_modules/bootstrap/scss/toasts";
 @import "../../../../node_modules/bootstrap/scss/modal";
 @import "../../../../node_modules/bootstrap/scss/tooltip";
-// @import "../../../../node_modules/bootstrap/scss/popover";
+@import "../../../../node_modules/bootstrap/scss/popover";
 @import "../../../../node_modules/bootstrap/scss/carousel";
 @import "../../../../node_modules/bootstrap/scss/spinners";
 @import "../../../../node_modules/bootstrap/scss/offcanvas";
