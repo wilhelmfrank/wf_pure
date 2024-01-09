@@ -57,9 +57,9 @@
                         <small class="col-10 text-muted text-truncate" [innerHtml]="abstract"></small>
                     </div>-->
                     <div class="d-flex flex-sm-row mt-3">
-                        <i class="col-1 bi bi-quote text-center"></i>
-                        <small class="col-9 text-muted text-truncate"
-                            [innerHtml]="'some stylish citation from a non-existent endpoint ...'"></small>
+                        <i class="col-1 bi bi-quote text-center" style="font-size: 1.5rem; transform: scale(1, -1) translate(0, -20);"></i>
+                        <small class="col-9 text-muted" style="font-size: .8rem;"
+                            [innerHtml]="dummy_citation"></small>
                     </div>
                     <div class="d-flex flex-sm-row mt-2">
                         <a purePopover class="btn btn-sm" tabindex="0" [attr.title]="item?.metadata?.title" data-bs-toggle="popover" [attr.data-bs-content]="abstract">Abstract</a>

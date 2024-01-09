@@ -1,12 +1,12 @@
-<div class="container-fluid w-75">
+<div class="container-fluid">
     <div #fixed_nav id="fixed_nav" class="row align-items-center nav_pos bg-body">
-        <div class="col-sm-4 ps-0">
+        <div class="col-sm-3 offset-lg-2 ps-0">
             <pure-topnav></pure-topnav>
         </div>
-        <div class="col-sm-2 text-end">
+        <div class="col-sm-1">
             <small>{{current_page}} / {{number_of_pages}}</small>
         </div>
-        <nav class="col-sm text-end" wfvsPagination #pagination="wfvsPagination" [totalPages]="number_of_pages"
+        <nav class="col-sm-3" wfvsPagination #pagination="wfvsPagination" [totalPages]="number_of_pages"
             [pageNo]="current_page" (pageChange)="onPageChange($event)">
             <ul class="pagination pagination-sm">
                 <li class="page-item" [ngClass]="{'disabled': pagination.isFirst}">
@@ -45,7 +45,7 @@
                 </li>
             </ul>
         </nav>
-        <div class="col-sm-1">
+        <div class="col-sm-1 text-start">
             <select class="form-select form-select-sm" [formControl]="select_pages_2_display"
                 (change)="pageSizeHandler($event)" size="1">
                 @for (pages of pages_2_display; track pages) {
@@ -56,7 +56,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-9 col-sm-12">
+        <div class="col-lg-7 offset-lg-2 col-sm-12">
             @if (result_list | async; as list) {
             <div class="card">
                 <div class="card-header">
@@ -77,8 +77,8 @@
             </div>
             }
         </div>
-        <div class="col-3 d-none d-lg-block">
-            <div class="card">
+        <div class="col-lg-2 d-none d-lg-block">
+            <div class="card mt-4">
                 <div class="card-header">
                 </div>
                 <div class="card-body">

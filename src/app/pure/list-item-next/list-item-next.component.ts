@@ -25,6 +25,10 @@ export class ListItemNextComponent {
 
   no_name = 'n/a';
 
+  dummy_citation = `Eisner, D., Neher, E., Taschenberger, H., & Smith, G. (2023).
+  Physiology of intracellular calcium buffering. Physiological Reviews, 103(4), 2767-2845.
+  doi:10.1152/physrev.00042.2022. `
+
   get abstract() {
 
     if (this.item && this.item?.metadata?.abstracts?.length > 0) {
